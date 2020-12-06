@@ -1,0 +1,36 @@
+<div>
+ <div>
+     <input type="date" [(ngModel)]="searchByStartDate" (change)="filterByDateRange()" style="margin-right: 5px; margin-left: 5px;"/>
+     <input type="date" [(ngModel)]="searchByEndDate" (change)="filterByDateRange()" />
+     <span style="margin-left: 5px; color: rgb(219, 9, 209);">Total Record: {{currentData.length}}</span>
+     <button class="button btn-primary add-btn" routerLink="/save-data">Add New Record</button>
+ </div>
+    <table>
+        <thead>
+          <tr style="background: '#48ac91'; color: '#fff'">
+            <th (click)="sortBy = 'city'" class="pinter">City <span class="material-icons" [ngStyle]="{'color': sortBy == 'city'? '#000': '#fff'}"> swap_vert</span></th>
+            <th (click)="sortBy = 'start_date'" class="pinter">Start Date <span class="material-icons" [ngStyle]="{'color': sortBy == 'start_date'? '#000': '#fff'}"> swap_vert</span></th>
+            <th (click)="sortBy = 'end_date'" class="pinter">End Date <span class="material-icons" [ngStyle]="{'color': sortBy == 'end_date'? '#000': '#fff'}"> swap_vert</span></th>
+            <th (click)="sortBy = 'price'" class="pinter">Price <span class="material-icons" [ngStyle]="{'color': sortBy == 'price'? '#000': '#fff'}"> swap_vert</span></th>
+            <th (click)="sortBy = 'status'" class="pinter">Status <span class="material-icons" [ngStyle]="{'color': sortBy == 'status'? '#000': '#fff'}"> swap_vert</span></th>
+            <th (click)="sortBy = 'color'" class="pinter">Color <span class="material-icons" [ngStyle]="{'color': sortBy == 'color'? '#000': '#fff'}"> swap_vert</span></th>
+            <th style="text-align: center;" class="pinter">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr *ngFor="let item of currentData | sort: sortBy ; let i = index;">
+           <td>{{item["city"]}}</td>
+           <td>{{item["start_date"] | date:'yyyy-MM-dd'}}</td>
+           <td>{{item["end_date"] | date:'yyyy-MM-dd'}}</td>
+           <td>{{item["price"]}}</td>
+           <td>{{item["status"]}}</td>
+           <td [ngStyle]="{background: item['color'], color: '#fff'}">{{item["color"]}}</td>
+           <td style="text-align: center;">
+               <button class="button btn-danger" (click)="deleteData(item, i)">Delete</button>
+               <button class="button btn-primary" [routerLink]="['/save-data', { id: item['id'] }]">Update</button>
+           </td>
+        </tr>
+        </tbody>
+      </table>
+
+</div>

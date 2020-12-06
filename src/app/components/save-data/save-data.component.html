@@ -1,0 +1,29 @@
+<div>
+    <p *ngIf="error && message" style="text-align: center; padding: 10px; color: #fff; background: red;">{{message}}</p>
+    <p *ngIf="!error && message" style="text-align: center; padding: 10px; color: #fff; background: green;">{{message}}</p>
+    <div class="center">
+        <h3 style="text-align: center;">{{pageTitle}}</h3>
+        <form>
+          <label for="city">City</label>
+          <input type="text" [(ngModel)]="currentData.city" name="city" placeholder="Enter City Name..">
+    
+          <label for="startdate">Start Date</label>
+          <input type="date" [value]="currentData.start_date | date:'yyyy-MM-dd'"  (input)="currentData.start_date=parseDate($event.target.value)" name="startdate" placeholder="Enter Start Date..">
+    
+          <label for="endDate">End Date</label>
+          <input type="date" [value]="currentData.end_date | date:'yyyy-MM-dd'"  (input)="currentData.end_date=parseDate($event.target.value)" name="endDate" placeholder="Enter End Date..">
+      
+          <label for="price">Price</label>
+          <input type="number" [(ngModel)]="currentData.price" name="lastname" placeholder="Enter Price..">
+    
+          <label for="status">Status</label>
+          <input type="text" [(ngModel)]="currentData.status" name="status" placeholder="Enter Status..">
+    
+          <label for="color">Color</label>
+          <input type="color" [(ngModel)]="currentData.color" name="color" style="padding: 0;" value="#ff0000">
+        
+          <button type="button" class="btn-secondary" (click)="saveData()">Save</button>
+          <button type="button" class="btn-primary" routerLink="/home" >Back to Home</button>
+        </form>
+      </div>
+</div>
